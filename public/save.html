@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <title>ChatHooks | SavedHooks</title>
+  <style>
+     .input{
+        width: 350px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  height: 70px;
+}
+body{
+    font-family: Sans-serif;
+    background-color: white;
+    display: flex;
+justify-content: center;
+align-items: center;
+}
+    .button{
+    background-color: #3d413d; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    width: 150px;
+    height: 70px;
+}
+.logo{
+    text-align: center;
+    font-size:  32px;
+}
+.button:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+  .textarea{
+    width: 500px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  height: 45px;
+ resize: none;
+  }
+  </style>
+</head>
+
+<body>
+
+  <main class="app">
+    <div class="input-header">
+      <h2><span id="date"></span></h2>
+      <text>Your Saved Webhooks</text>
+      <div class="to-do-input">
+        <input type="text" class="input" id="item" placeholder="Enter a Webhook URL"><button id="enter" class="button">Enter</button>
+      </div>
+    </div>
+    <div class="to-do-list"></div>
+  </main>
+
+  <script>
+    const itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+
+document.querySelector("#enter").addEventListener("click", () => {
+  const item = document.querySelector("#item")
+  createItem(item)
+})
+
+function displayDate(){
+  let date = new Date()
+  date = date.toString().split(" ")
+  date = date[1] + " " + date[2] + " " + date[3] 
+  document.querySelector("#date").innerHTML = date 
+}
+
+function displayItems(){
+  let items = ""
+  for(let i = 0; i < itemsArray.length; i++){
+    items += `<div class="item">
+                <div class="input-controller">
+                  <textarea class="textarea" disabled>${itemsArray[i]}</textarea>
+                  <div class="edit-controller">
+                    <i class="fa-solid fa-check deleteBtn"></i>
+                  </div>
+                </div>
+              </div>`
+  }
+  document.querySelector(".to-do-list").innerHTML = items
+  activateDeleteListeners()
+  activateEditListeners()
+  activateSaveListeners()
+  activateCancelListeners()
+}
+
+function activateDeleteListeners(){
+  let deleteBtn = document.querySelectorAll(".deleteBtn")
+  deleteBtn.forEach((dB, i) => {
+    dB.addEventListener("click", () => { deleteItem(i) })
+  })
+}
+
+
+function createItem(item){
+  itemsArray.push(item.value)
+  localStorage.setItem('items', JSON.stringify(itemsArray))
+  location.reload()
+}
+
+function deleteItem(i){
+  itemsArray.splice(i,1)
+  localStorage.setItem('items', JSON.stringify(itemsArray))
+  location.reload()
+}
+
+function updateItem(text, i){
+  itemsArray[i] = text
+  localStorage.setItem('items', JSON.stringify(itemsArray))
+  location.reload()
+}
+
+window.onload = function() {
+  displayDate()
+  displayItems()
+};
+  </script>
+
+</body>
+
+</html>

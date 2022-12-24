@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+    .input{
+      border-width: 0px 0px 1px;
+    border-color: #DADADA;
+    font-size: 14px;
+    outline: none;
+    text-align: left;
+    letter-spacing: 0px;
+    color: #323A47;
+    padding-bottom: 5px;
+    background: none;
+    height: 50px;
+    font-size: larger;
+    width: 200px;
+
+}
+body{
+    font-family: Sans-serif;
+    background-color: white;
+}
+.dark-mode {
+  background-color: rgb(40, 42, 44);
+  color: white;
+}
+.button{
+    background-color: hsl(219, 100%, 66%); /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    width: 280px;
+    height: 80px;
+    font-size: large;
+}
+a{
+  background-color: hsl(219, 13%, 25%); /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    width: 180px;
+    height: 47px;
+    font-size: large;
+}
+a:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+.logo{
+    text-align: center;
+    font-size:  32px;
+    font-weight: 400;
+}
+.button:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid  hsl(219, 100%, 66%);;
+}
+  .textarea{
+    border-width: 0px 0px 1px;
+    border-color: #DADADA;
+    font-size: 14px;
+    outline: none;
+    width: 200px;
+    text-align: left;
+    letter-spacing: 0px;
+    color: #323A47;
+    padding-bottom: 5px;
+    height: 180px;
+    font-size: larger;
+    width: 450px;
+    resize: none;
+    background: none;
+  }
+  .form{
+    width: 450px;
+    text-align: center;
+    margin-top: 10%;
+  }
+  .img{
+    width: 280px;
+    height: 140px;
+  }
+  .data{
+    width: 400px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  height: 530px;
+  background: none;
+ resize: none;
+  }
+  .inline{
+    display: inline-flex; 
+    gap: 20px;
+  }
+  /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.footer{
+    position:absolute;
+   bottom:0;
+   clear: both;
+            width: 99.3%;
+   text-align: center;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+  .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.center{
+display: block;
+margin: auto;
+}
+
+
+/* Change the link color on hover */
+li a:hover {
+  background-color: #555;
+  color: white;
+}
+    </style>
+    <title>Chathooks | POST</title>
+</head>
+<body>
+    
+
+    <div class="inline">
+        <div>
+        <textarea class="data" disabled>
+            "cardsV2": [
+{
+  "cardId": "unique-card-id",
+  "card": {
+    "header": {
+      "title": `${req.body.header}`,
+      "subtitle": `${req.body.sub}`,
+      "imageUrl":
+      `${req.body.image}`,
+      "imageType": "SQUARE",
+    },
+    "sections": [
+      {
+        "header": "Message",
+        "collapsible": false,
+        "uncollapsibleWidgetsCount": 1,
+        "widgets": [
+          {
+            "decoratedText": {
+              "startIcon": {
+                "knownIcon": "DESCRIPTION",
+              },
+              "text": `${req.body.message}`,
+            }
+          },
+        ],
+      },
+    ]
+  },  
+},
+],
+        </textarea>
+</div>
+    <form align="center" class="form" action='/response' method='POST'>
+      <h4 class="logo">Google Chat Webhooks</h4>
+<section class="inline">
+    <input class="input" type="text" name="webhook" placeholder="Webhook URL*" required>
+    <br>
+    <input class="input" type="text" name="header" placeholder="Header (Optional)">
+    <br>
+    <input class="input" type="text" name="image"  placeholder="Image (Optional)">
+    <br>
+    </section>
+    <section class="inline">
+    <textarea class="textarea" type="text" name="message"  placeholder="Message*" required></textarea>
+    <br>
+    <input class="input" type="text"name="sub" placeholder="Sub (Optional)">
+    <br>
+  </section>
+  <section class="inline">
+    <button class="button" type="submit">Send Webhook</button>
+    <a href="/saved">Save Webhook URL</a>
+  </section>
+</form>
+<div>
+</div>
+</div>
+<p><strong>Dark Theme?</strong></p>
+<label class="switch">
+
+  <input type="checkbox" onchange="toggledark()">
+  <span class="slider round"></span>
+</label>
+<p></p>
+<rssapp-wall id="tKjMsQbFLvdZ5ahL"></rssapp-wall><script src="https://widget.rss.app/v1/wall.js" type="text/javascript" async></script>
+<script>
+    function toggledark() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+}
+const a = Math.floor(Math.random()*80)
+</script>
+</html>
